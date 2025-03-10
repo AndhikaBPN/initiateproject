@@ -9,6 +9,7 @@ import io.cucumber.testng.CucumberOptions;
         },
         glue = {
                 "com.projectname.stepdefinition",
+                "com.projectname.hooks"
         },
         plugin = {
                 "pretty",
