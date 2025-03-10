@@ -118,6 +118,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven.surefire.plugin.version}</version>
         <configuration>
+          <systemPropertyVariables>
+            <env>${env}</env>
+          </systemPropertyVariables>
           <useSystemClassLoader>false</useSystemClassLoader>
           <includes>
             <include>**/*Test.java</include>
@@ -129,7 +132,7 @@
           <!-- Optional: Specify if using testng.xml -->
 
           <suiteXmlFiles>
-            <suiteXmlFile>src/test/java/com/projectname/testsuite/TestSuiteRunner.xml</suiteXmlFile>
+            <suiteXmlFile>src/test/java/com/projectname/testsuite/TestSuite.xml</suiteXmlFile>
           </suiteXmlFiles>
 
           <testFailureIgnore>false</testFailureIgnore>

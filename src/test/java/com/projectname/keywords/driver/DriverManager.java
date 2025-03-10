@@ -1,14 +1,12 @@
 package com.projectname.keywords.driver;
 
-import com.projectname.keywords.Utils;
+import com.projectname.keywords.utils.Utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-
-import java.util.Locale;
 
 public class DriverManager {
 

@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = {
-
+                "src/test/resources/features/open_chrome/chrome.feature"
         },
         glue = {
                 "com.projectname.stepdefinition",

@@ -1,4 +1,4 @@
-package com.projectname.keywords;
+package com.projectname.keywords.utils;
 
 import com.projectname.keywords.driver.DriverManager;
 import org.apache.commons.io.FileUtils;
@@ -12,6 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utils {
+
+    public static void main(String[] args) {
+        openBrowser("chrome", "https://www.google.com/");
+    }
 
     public static void openBrowser(String driver, String url) {
         DriverManager.getDriver(driver, url);
