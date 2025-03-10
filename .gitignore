@@ -62,6 +62,7 @@ build/
 ### Aqua ###
 .java~
 .feature~
+.properties~
 
 ### VS Code ###
 .vscode/
