@@ -60,9 +60,9 @@ build/
 !**/src/test/**/build/
 
 ### Aqua ###
-.java~
-.feature~
-.properties~
+*.java~
+*.feature~
+*.properties~
 
 ### VS Code ###
 .vscode/

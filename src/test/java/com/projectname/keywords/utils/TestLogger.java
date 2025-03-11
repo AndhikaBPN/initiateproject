@@ -1,10 +1,9 @@
-package com.projectname.keywords.utils;
-
-import org.testng.Assert;
+package ai.lulladream.keywords.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -14,11 +13,15 @@ public class TestLogger {
 
     public static void logInfo(String message) {
         // Setting up the logger to print to console
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new SimpleFormatter());
-        logger.addHandler(consoleHandler);
-        logger.setUseParentHandlers(false);
-        log(message);
+        Logger logger = Logger.getLogger("Logger");
+        logger.setLevel(Level.ALL);
+        logger.log(Level.INFO, message);
+//        logger.log(Level.FINE, "another message");
+//        ConsoleHandler consoleHandler = new ConsoleHandler();
+//        consoleHandler.setFormatter(new SimpleFormatter());
+//        logger.addHandler(consoleHandler);
+//        logger.setUseParentHandlers(false);
+//        log(message);
     }
 
     public static void logWarning(String message) {
