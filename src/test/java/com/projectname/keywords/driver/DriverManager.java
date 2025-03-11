@@ -38,6 +38,8 @@ public class DriverManager {
     }
 
     private static void chromeDriver(String url) {
+        TestLogger.logInfo("Redirect to URL: " + url);
+
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get(url);
@@ -47,6 +49,8 @@ public class DriverManager {
     }
 
     private static void firefoxDriver(String url) {
+        TestLogger.logInfo("Redirect to URL: " + url);
+
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
         driver.get(url);
@@ -56,6 +60,8 @@ public class DriverManager {
     }
 
     private static void edgeDriver(String url) {
+        TestLogger.logInfo("Redirect to URL: " + url);
+
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.get(url);
@@ -65,6 +71,8 @@ public class DriverManager {
     }
 
     private static void safariDriver(String url) {
+        TestLogger.logInfo("Redirect to URL: " + url);
+
         driver = new SafariDriver();
         driver.get(url);
         driver.manage().window().maximize();

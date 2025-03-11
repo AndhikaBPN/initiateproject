@@ -11,8 +11,6 @@ public class chrome {
 
     @Given("user open google page")
     public void user_open_google_page() {
-//        System.out.println("Base URL: " + url);
-        TestLogger.logInfo("Base URL: " + url);
         Utils.openBrowser("chrome", url);
     }
 

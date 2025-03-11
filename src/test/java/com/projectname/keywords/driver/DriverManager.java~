@@ -37,7 +37,7 @@ public class DriverManager {
         }
     }
 
-    public static void chromeDriver(String url) {
+    private static void chromeDriver(String url) {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get(url);
@@ -46,7 +46,7 @@ public class DriverManager {
         Utils.delay(5);
     }
 
-    public static void firefoxDriver(String url) {
+    private static void firefoxDriver(String url) {
         WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
         driver.get(url);
@@ -55,7 +55,7 @@ public class DriverManager {
         Utils.delay(5);
     }
 
-    public static void edgeDriver(String url) {
+    private static void edgeDriver(String url) {
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.get(url);
@@ -64,7 +64,7 @@ public class DriverManager {
         Utils.delay(5);
     }
 
-    public static void safariDriver(String url) {
+    private static void safariDriver(String url) {
         driver = new SafariDriver();
         driver.get(url);
         driver.manage().window().maximize();
@@ -74,12 +74,10 @@ public class DriverManager {
 
     public static void closeDriver() {
         if (driver != null) {
-//            System.out.println("Driver will be closed");
             TestLogger.logInfo("Driver will be closed");
             driver.quit();
             driver = null;
         } else {
-//            System.out.println("Driver is NULL");
             TestLogger.logInfo("Driver is NULL");
         }
     }
