@@ -1,4 +1,4 @@
-package ai.lulladream.keywords.utils;
+package com.projectname.keywords.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,34 +15,26 @@ public class TestLogger {
         // Setting up the logger to print to console
         Logger logger = Logger.getLogger("Logger");
         logger.setLevel(Level.ALL);
-        logger.log(Level.INFO, message);
-//        logger.log(Level.FINE, "another message");
-//        ConsoleHandler consoleHandler = new ConsoleHandler();
-//        consoleHandler.setFormatter(new SimpleFormatter());
-//        logger.addHandler(consoleHandler);
-//        logger.setUseParentHandlers(false);
-//        log(message);
+        logger.log(Level.INFO, log(message));
     }
 
     public static void logWarning(String message) {
         // Setting up the logger to print to console
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new SimpleFormatter());
-        logger.addHandler(consoleHandler);
-        logger.setUseParentHandlers(false);
-        warning(message);
+        Logger logger = Logger.getLogger("Logger");
+        logger.setLevel(Level.ALL);
+        logger.log(Level.WARNING, warning(message));
     }
 
-    private static void log(String message) {
+    private static String log(String message) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timestamp = LocalDateTime.now().format(formatter);
-        logger.info(timestamp + " : " + message);
+        return timestamp + " : " + message;
     }
 
-    private static void warning(String message) {
+    private static String warning(String message) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String timestamp = LocalDateTime.now().format(formatter);
-        logger.warning(timestamp + " : " + message);
+        return timestamp + " : " + message;
     }
 
 }

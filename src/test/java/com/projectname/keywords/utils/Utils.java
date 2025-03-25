@@ -1,19 +1,27 @@
-package ai.lulladream.keywords.utils;
+package com.projectname.keywords.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Utils {
 
-    public static void openBrowser(String driver, String url) {
-        DriverManager.getDriver(driver, url);
+    static String prjPath = System.getProperty("user.dir");
+
+    public static void openBrowser(Platform platform, String url) {
+        DriverManager.getDriver(platform, url);
+    }
+
+    public static WebDriver getDriver() {
+        return DriverManager.getWebDriver();
     }
 
     public static void closeBrowser() {
@@ -40,6 +48,35 @@ public class Utils {
 
     public static void waitForElementClickable(By locator, int timeout) {
         DriverManager.waitForElementClickable(locator, timeout);
+    }
+
+    public static boolean verifyElementPresent(By locator, int timeout) {
+        try {
+            waitForElementPresent(locator, timeout);
+            System.out.println("TRUE");
+            return true;
+        } catch (Exception e) {
+            System.out.println("FALSE");
+            return false;
+        }
+    }
+
+    public static boolean verifyElementVisible(By locator, int timeout) {
+        try {
+            waitForElementVisible(locator, timeout);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean verifyElementClickable(By locator, int timeout) {
+        try {
+            waitForElementClickable(locator, timeout);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException {
@@ -73,7 +110,7 @@ public class Utils {
         js.executeScript("window.scrollBy(0,"+vertical+")");
     }
 
-    public static void scrollDownToButtom(WebDriver driver) {
+    public static void scrollDownToBottom(WebDriver driver) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -105,6 +142,50 @@ public class Utils {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void generateReport(String projectName, String dateTime) {
+        System.out.println("Generate Report...");
+
+        try {
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "allure generate target/allure-results --clean --single-file");
+            builder.redirectErrorStream(true); // Merge error stream into output stream
+            Process process = builder.start();
+
+            // Read and print output from CMD
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            // Rename file
+            changeFileReportName(projectName, dateTime);
+
+            int exitCode = process.waitFor(); // Wait for command to complete
+            System.out.println("Report generated successfully!");
+            System.out.println("Exit Code: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changeFileReportName(String projectName, String dateTime) {
+        File oldFile = new File(prjPath + "/allure-report/index.html");
+        File newFile = new File(prjPath + "/allure-report/" + projectName + "_" + dateTime + ".html");
+
+        System.out.println("Rename Report File...");
+
+        if (oldFile.renameTo(newFile)) {
+            System.out.println("Allure report renamed successfully!");
+        } else {
+            System.out.println("Failed to rename report.");
+        }
+    }
+
+    public static String generateDateTime() {
+        return new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
     }
 
 }
