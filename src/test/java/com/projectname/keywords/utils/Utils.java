@@ -1,6 +1,5 @@
-package com.projectname.keywords.utils;
+package ai.lulladream.keywords.utils;
 
-import com.projectname.keywords.driver.DriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
@@ -13,16 +12,34 @@ import java.util.Date;
 
 public class Utils {
 
-    public static void main(String[] args) {
-        openBrowser("chrome", "https://www.google.com/");
-    }
-
     public static void openBrowser(String driver, String url) {
         DriverManager.getDriver(driver, url);
     }
 
     public static void closeBrowser() {
         DriverManager.closeDriver();
+    }
+
+    public static void clickElement(By locator) {
+        waitForElementClickable(locator, 10);
+        DriverManager.clickElement(locator);
+    }
+
+    public static void sendText(By locator, String text) {
+        waitForElementPresent(locator, 10);
+        DriverManager.sendText(locator, text);
+    }
+
+    public static void waitForElementPresent(By locator, int timeout) {
+        DriverManager.waitForElementPresent(locator, timeout);
+    }
+
+    public static void waitForElementVisible(By locator, int timeout) {
+        DriverManager.waitForElementVisible(locator, timeout);
+    }
+
+    public static void waitForElementClickable(By locator, int timeout) {
+        DriverManager.waitForElementClickable(locator, timeout);
     }
 
     public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException {
