@@ -1,4 +1,4 @@
-package ai.lulladream.keywords.utils;
+package com.projectname.keywords.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
