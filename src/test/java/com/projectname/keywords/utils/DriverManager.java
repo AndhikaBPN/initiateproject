@@ -2,6 +2,7 @@ package com.projectname.keywords.utils;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -185,6 +186,15 @@ public class DriverManager {
         }
     }
 
+    static String getText(By locator) {
+        if (driver != null) {
+            WebElement element = driver.findElement(locator);
+            return element.getText();
+        } else {
+            throw new IllegalStateException("WebDriver is not initialized. Call getDriver() first.");
+        }
+    }
+
     // Wait for element to be PRESENT in the DOM
     static WebElement waitForElementPresent(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
@@ -232,6 +242,35 @@ public class DriverManager {
             wait.until(ExpectedConditions.elementToBeClickable(locator));
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    static void playAudio() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector('audio').play()");
+    }
+
+    static boolean verifyAudioPlayer(int waitSec) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        try {
+            Double timeBefore = ((Number) js.executeScript(
+                    "let audio = document.querySelector('audio'); return audio ? audio.currentTime : 0;"
+            )).doubleValue();
+
+            TestLogger.logInfo("timeBefore: " + timeBefore);
+            Utils.delay(waitSec);
+
+            Double timeAfter = ((Number) js.executeScript(
+                    "let audio = document.querySelector('audio'); return audio ? audio.currentTime : 0;"
+            )).doubleValue();
+
+            TestLogger.logInfo("timeAfter: " + timeAfter);
+
+            return timeAfter > timeBefore;
+        } catch (Exception e) {
+            TestLogger.logWarning("Error while verifying audio playback: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
