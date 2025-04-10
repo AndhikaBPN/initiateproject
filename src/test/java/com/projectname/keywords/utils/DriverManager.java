@@ -248,6 +248,17 @@ public class DriverManager {
 
     static void playAudio() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        Boolean isPlaying = ((Boolean) js.executeScript(
+                "let audio = document.querySelector('audio'); " + "return  audio && !audio.paused && !audio.ended && audio.readyState > 2;"
+        ));
+
+        if(isPlaying) {
+            TestLogger.logInfo("Audio is already playing.");
+            return;
+        }
+
+        TestLogger.logInfo("Playing audio");
         js.executeScript("document.querySelector('audio').play()");
     }
 
