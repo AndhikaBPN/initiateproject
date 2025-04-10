@@ -38,6 +38,10 @@ public class Utils {
         DriverManager.sendText(locator, text);
     }
 
+    public static String getText(By locator) {
+        return DriverManager.getText(locator);
+    }
+
     public static void waitForElementPresent(By locator, int timeout) {
         DriverManager.waitForElementPresent(locator, timeout);
     }
@@ -51,32 +55,15 @@ public class Utils {
     }
 
     public static boolean verifyElementPresent(By locator, int timeout) {
-        try {
-            waitForElementPresent(locator, timeout);
-            System.out.println("TRUE");
-            return true;
-        } catch (Exception e) {
-            System.out.println("FALSE");
-            return false;
-        }
+        return DriverManager.verifyElementPresent(locator, timeout);
     }
 
     public static boolean verifyElementVisible(By locator, int timeout) {
-        try {
-            waitForElementVisible(locator, timeout);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return DriverManager.verifyElementVisible(locator, timeout);
     }
 
     public static boolean verifyElementClickable(By locator, int timeout) {
-        try {
-            waitForElementClickable(locator, timeout);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return DriverManager.verifyElementClickable(locator, timeout);
     }
 
     public static String getScreenshot(WebDriver driver, String screenshotName) throws IOException {
@@ -186,6 +173,20 @@ public class Utils {
 
     public static String generateDateTime() {
         return new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+    }
+
+    public static void playAudio() {
+        DriverManager.playAudio();
+    }
+
+    public static void verifyAudioplayed(int waitSec) {
+        boolean isPlaying = DriverManager.verifyAudioPlayer(waitSec);
+
+        if(isPlaying) {
+            TestLogger.logInfo("Audio is playing.");
+        } else {
+            TestLogger.logWarning("Audio is not playing.");
+        }
     }
 
 }
