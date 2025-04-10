@@ -57,20 +57,20 @@ public class DriverManager {
     }
 
     private static WebDriver chromeDriver(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver chromeDriverHeadless(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -81,26 +81,26 @@ public class DriverManager {
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver firefoxDriver(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.firefoxdriver().setup();
         WebDriver driver = new FirefoxDriver();
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver firefoxDriverHeadless(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.firefoxdriver().setup();
         FirefoxOptions options = new FirefoxOptions();
@@ -109,26 +109,26 @@ public class DriverManager {
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver edgeDriver(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.edgedriver().setup();
         WebDriver driver = new EdgeDriver();
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver edgeDriverHeadless(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
@@ -138,30 +138,30 @@ public class DriverManager {
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     private static WebDriver safariDriver(String url) {
-        ai.lulladream.keywords.utils.TestLogger.logInfo("Redirect to URL: " + url);
+        TestLogger.logInfo("Redirect to URL: " + url);
 
         WebDriver driver = new SafariDriver();
         driver.get(url);
         driver.manage().window().maximize();
 
-        ai.lulladream.keywords.utils.Utils.delay(3);
+        Utils.delay(3);
 
         return driver;
     }
 
     static void closeDriver() {
         if (driver != null) {
-            ai.lulladream.keywords.utils.TestLogger.logInfo("Driver will be closed");
+            TestLogger.logInfo("Driver will be closed");
             driver.quit();
             driver = null;
         } else {
-            ai.lulladream.keywords.utils.TestLogger.logInfo("Driver is NULL");
+            TestLogger.logInfo("Driver is NULL");
         }
     }
 
@@ -179,7 +179,7 @@ public class DriverManager {
             WebElement element = driver.findElement(locator);
             element.clear();
             element.sendKeys(text);
-            ai.lulladream.keywords.utils.TestLogger.logInfo("Send text: " + text);
+            TestLogger.logInfo("Send text: " + text);
         } else {
             throw new IllegalStateException("WebDriver is not initialized. Call getDriver() first.");
         }
